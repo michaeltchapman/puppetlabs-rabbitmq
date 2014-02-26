@@ -111,10 +111,13 @@ class { 'rabbitmq':
 }
 ```
 
-**NOTE:** You still need to use `x-ha-policy: all` in your client 
-applications for any particular queue to take advantage of H/A.
+**NOTE:** If you are using a version of RabbitMQ less than 3.0,
+you still need to use `x-ha-policy: all` in your client 
+applications for any particular queue to take advantage of H/A via
+mirrored queues.
 
-You should set the 'config_mirrored_queues' parameter if you plan
+If you are using a version of RabbitMQ >= 3.0 You should set the
+'config_mirrored_queues' parameter if you plan
 on using RabbitMQ Mirrored Queues within your cluster:
 
 ```puppet

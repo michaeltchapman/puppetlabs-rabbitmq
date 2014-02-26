@@ -81,8 +81,14 @@ class rabbitmq::config {
     notify  => Class['rabbitmq::service'],
   }
 
-
   if $config_cluster {
+
+    if $rabbit::config_mirrored_queues {
+      rabbitmq::policy { 'ha-all':
+        pattern  => '.*',
+        definition => '{"ha-mode":"all","ha-sync-mode":"automatic"}'
+      }
+    }
 
     file { 'erlang_cookie':
       ensure  => 'present',
